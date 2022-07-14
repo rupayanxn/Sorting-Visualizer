@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-
+import Navbar from './components/Navbar';
+import Sorting from './components/Sorting';
+import PathFinder from './components/PathFinder';
 function App() {
+
+  const [algo, setAlgo] = useState(['sort','Merge Sort']);
+
+  function onAlgoChange(newAlgo) {
+    setAlgo(newAlgo);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Navbar onAlgoChange={onAlgoChange}/>
+      { 
+        algo[0] == 'sort' ? <Sorting algo={algo} />:<PathFinder algo={algo} />
+      }
+    </div> 
   );
 }
 
